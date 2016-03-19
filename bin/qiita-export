@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+require 'rubygems'
+require 'qiita-export'
+
+QiitaExport::Config.configure(ARGV)
+if QiitaExport::Config.empty?
+  print QiitaExport::Config.help
+  exit true
+end
+
+begin
+  QiitaExport::Config.validate!
+rescue ArgumentError => e
+  $stderr.puts e.message
+  exit(1)
+end
+
+QiitaExport::Exporter::new.export

@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["akishin999@gmail.com"]
   spec.summary       = %q{export tool for Qiita}
   spec.description   = %q{export tool for Qiita}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/akishin/qiita-export"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

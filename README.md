@@ -4,10 +4,10 @@ export tool for Qiita(http://qiita.com/).
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add this line to your Gemfile:
 
 ```ruby
-gem 'qiita_export'
+gem 'qiita-export'
 ```
 
 And then execute:
@@ -19,7 +19,7 @@ $ bundle
 Or install it yourself as:
 
 ```
-$ gem install qiita_export
+$ gem install qiita-export
 ```
 
 ## Usage

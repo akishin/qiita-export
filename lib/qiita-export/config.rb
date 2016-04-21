@@ -62,6 +62,10 @@ module QiitaExport
         if kobito? && api?
           fail ArgumentError.new("if you specify option --kobito, you cannot specify option --url, --url-list and --user-id.")
         end
+
+        if !kobito? && !api?
+          fail ArgumentError.new("one of the required options --kobito, --url, --url-list and --user-id must be specified.")
+        end
       end
 
       def kobito?

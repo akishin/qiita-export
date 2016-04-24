@@ -31,10 +31,12 @@ Usage: qiita-export [options]
     -U, --user-id=user_id            specify the userid for the Qiita.
     -k, --kobito=[Kobito.db]         export Kobito.app database.
     -t, --team=teamname              export Qiita Team articles only.
+    -T, --team-all                   export Qiita Team all articles.
     -i, --image                      export with images.
     -h, --html                       export in html format(experimental).
     -o, --output-dir=dirpath         specify the full path of destination directory.
     -a, --api-token=token            specify API token for Qiita.
+    -e, --exclude-pattern=regexp     specify the regexp pattern to exclude article title.
 ```
 
 ## Contributing

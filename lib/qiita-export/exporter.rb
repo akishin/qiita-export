@@ -22,7 +22,9 @@ module QiitaExport
       if Config.kobito?
         QiitaExport::Fetcher::KobitoFetcher.new
       elsif Config.user?
-        QiitaExport::Fetcher::UserFetcher.new
+        QiitaExport::Fetcher::PaginationFetcher.new(:user)
+      elsif Config.team_all?
+        QiitaExport::Fetcher::PaginationFetcher.new(:team)
       else
         QiitaExport::Fetcher::UrlFetcher.new
       end

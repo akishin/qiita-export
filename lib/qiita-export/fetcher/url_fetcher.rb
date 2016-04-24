@@ -8,7 +8,8 @@ module QiitaExport::Fetcher
     def find_articles
       articles = []
       article_urls.each do |url|
-        articles << to_article(find_article(url))
+        article = to_article(find_article(url))
+        articles << article unless exclude?(article.title)
       end
       articles
     end

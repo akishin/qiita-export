@@ -42,7 +42,8 @@ module QiitaExport::Fetcher
 
       articles = []
       while(row = rs.next)
-        articles << to_article(row)
+        article =  to_article(row)
+        articles << article unless exclude?(article.title)
       end
       articles
     ensure

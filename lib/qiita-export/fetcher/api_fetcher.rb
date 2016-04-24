@@ -5,8 +5,6 @@ require 'uri'
 module QiitaExport::Fetcher
   class ApiFetcher < Base
 
-    DEFAULT_HOST = "qiita.com"
-
     protected
 
     def to_article(res)
@@ -28,14 +26,6 @@ module QiitaExport::Fetcher
 
     def request_header
       has_api_token? ? auth_header : default_header
-    end
-
-    def api_domain(url = nil)
-      if url.nil?
-        team? ? "#{team_name}.#{DEFAULT_HOST}" : DEFAULT_HOST
-      else
-        URI.parse(url).host
-      end
     end
 
   end

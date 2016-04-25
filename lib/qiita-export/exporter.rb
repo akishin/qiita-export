@@ -37,8 +37,13 @@ module QiitaExport
     end
 
     def export_file(articles)
-      $stdout.puts "export articles to #{Config.export_dir_path}"
-      FileUtils.makedirs(Config.export_dir_path) unless Dir.exists?(Config.export_dir_path)
+      if articles.length < 1
+        $stdout.puts("no articles found.")
+        return
+      end
+
+      $stdout.puts "export articles to #{Config.output_dir}"
+
       articles.each do |article|
         article.save
       end

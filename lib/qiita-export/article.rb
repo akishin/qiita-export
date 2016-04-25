@@ -33,7 +33,7 @@ module QiitaExport
     end
 
     def save
-      save_dir  = File.join(Config.export_dir_path, Config.team_name(@url), @key)
+      save_dir  = File.join(Config.export_dir_path(@url), @key)
 
       FileUtils.makedirs(save_dir) unless Dir.exists?(save_dir)
 

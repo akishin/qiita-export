@@ -126,6 +126,15 @@ module QiitaExport
         end
       end
 
+      USER_ID_PATTERN = Regexp.new("https?://[^/?&#]+/([^/]+)/")
+      def user_id(url = nil)
+        if url.nil?
+          @option[:'user-id']
+        else
+          url.match(USER_ID_PATTERN)[1]
+        end
+      end
+
       def article_key(url)
         File.basename(url)
       end
@@ -184,16 +193,15 @@ module QiitaExport
         header
       end
 
-      def user_id
-        @option[:'user-id']
+      def output_dir
+        return "" unless file_export?
+        File.expand_path(@option[:'output-dir'].strip)
       end
 
-      def export_dir_path
-        if user?
-          File.join(File.expand_path(@option[:'output-dir'].strip), user_id)
-        else
-          File.expand_path(@option[:'output-dir'].strip)
-        end
+      def export_dir_path(url)
+        team = team_name(url)
+        user = user_id(url)
+        File.join(output_dir, team, user)
       end
 
       def filename(title)

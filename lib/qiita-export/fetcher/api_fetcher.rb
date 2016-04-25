@@ -20,10 +20,6 @@ module QiitaExport::Fetcher
       ::QiitaExport::Article.new(key, url, title, raw_body, rendered_body, created_at, updated_at, user_id)
     end
 
-    def article_key(url)
-      File.basename(url)
-    end
-
     def request_header
       has_api_token? ? auth_header : default_header
     end

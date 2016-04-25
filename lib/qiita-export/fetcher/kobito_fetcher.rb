@@ -54,7 +54,7 @@ module QiitaExport::Fetcher
     private
 
     def to_article(row)
-      key           = File.basename(row['ZURL'])
+      key           = article_key(row['ZURL'])
       url           = row['ZURL']
       title         = row['ZTITLE']
       raw_body      = row['ZRAW_BODY']

@@ -126,6 +126,10 @@ module QiitaExport
         end
       end
 
+      def article_key(url)
+        File.basename(url)
+      end
+
       def article_urls
         urls = []
         urls << @option[:url] if present?(@option[:url])

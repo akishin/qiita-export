@@ -5,8 +5,6 @@ require 'open-uri'
 module QiitaExport::Fetcher
   class PaginationFetcher < ApiFetcher
 
-    PER_PAGE = 100
-
     def initialize(endpoint_sym)
       super()
       @endpoint = ApiEndPoint.instance(endpoint_sym)
@@ -33,8 +31,8 @@ module QiitaExport::Fetcher
     private
 
     def paginate_articles(page)
-      url = @endpoint.next_page(page)
-      open(@endpoint.next_page(page), request_header) do |io|
+      url = @endpoint.url(page: page)
+      open(url, request_header) do |io|
         JSON.parse(io.read)
       end
     rescue => e

@@ -9,7 +9,7 @@ module QiitaExport::Fetcher
                              :export_dir_path, :team?, :team_name,
                              :article_urls, :has_api_token?, :api_token,
                              :user_id, :default_header, :auth_header,
-                             :api_domain
+                             :api_domain, :article_key
 
     def initialize
       @config = ::QiitaExport::Config

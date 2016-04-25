@@ -3,16 +3,20 @@
 module QiitaExport::Fetcher
   class ApiEndPoint
 
+    MAX_PER_PAGE = 100
+
     def initialize
       @config = ::QiitaExport::Config
     end
 
-    def next_page(page)
+    def url(article_url: nil, page: 1)
       raise NotImplementedError.new("You must implement #{self.class}##{__method__}")
     end
 
     def self.instance(end_point_sym)
       case end_point_sym
+      when :item
+        ItemEndPoint.new
       when :user
         UserEndPoint.new
       when :team
@@ -23,19 +27,21 @@ module QiitaExport::Fetcher
     end
   end
 
-  class UserEndPoint < ApiEndPoint
-    PER_PAGE = 100
+  class ItemEndPoint < ApiEndPoint
+    def url(article_url: nil, page: 1)
+      "https://#{@config.api_domain(article_url)}/api/v2/items/#{@config.article_key(article_url)}"
+    end
+  end
 
-    def next_page(page)
-      "https://#{@config.api_domain}/api/v2/users/#{@config.user_id}/items?page=#{page}&per_page=#{PER_PAGE}"
+  class UserEndPoint < ApiEndPoint
+    def url(article_url: nil, page: 1)
+      "https://#{@config.api_domain}/api/v2/users/#{@config.user_id}/items?page=#{page}&per_page=#{MAX_PER_PAGE}"
     end
   end
 
   class TeamEndPoint < ApiEndPoint
-    PER_PAGE = 100
-
-    def next_page(page)
-      "https://#{@config.api_domain}/api/v2/items?page=#{page}&per_page=#{PER_PAGE}"
+    def url(article_url: nil, page: 1)
+      "https://#{@config.api_domain}/api/v2/items?page=#{page}&per_page=#{MAX_PER_PAGE}"
     end
   end
 end

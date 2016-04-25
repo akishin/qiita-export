@@ -5,6 +5,11 @@ require 'open-uri'
 module QiitaExport::Fetcher
   class UrlFetcher < ApiFetcher
 
+    def initialize
+      super()
+      @endpoint = ApiEndPoint.instance(:item)
+    end
+
     def find_articles
       articles = []
       article_urls.each do |url|
@@ -16,10 +21,14 @@ module QiitaExport::Fetcher
 
     private
 
-    def find_article(url)
-      open("https://#{api_domain(url)}/api/v2/items/#{article_key(url)}", request_header) do |io|
+    def find_article(article_url)
+      url = @endpoint.url(article_url: article_url)
+      open(url, request_header) do |io|
         JSON.parse(io.read)
       end
+    rescue => e
+      $stderr.puts "#{e} : #{url}"
+      raise
     end
   end
 end

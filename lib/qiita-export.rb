@@ -1,5 +1,6 @@
 require 'qiita-export/version'
 require 'qiita-export/image'
+require 'qiita-export/comment'
 require 'qiita-export/article'
 require 'qiita-export/config'
 require 'qiita-export/exporter'

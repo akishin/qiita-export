@@ -39,8 +39,13 @@ module QiitaExport
 
       file_path = File.join(save_dir, Config.filename(title))
       File.open(file_path, "w") { |f| f.write export_content }
-      if (Config.image_export?)
+
+      if Config.image_export?
         @images.each { |image| image.save(save_dir) }
+      end
+
+      if Config.comment_export?
+        Comment.new(@url).save(save_dir)
       end
     end
 

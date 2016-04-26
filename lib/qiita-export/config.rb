@@ -27,6 +27,7 @@ module QiitaExport
           opt.on('-t', '--team=teamname',          'export Qiita Team articles only.')                     { |v| @option[:team] = v }
           opt.on('-T', '--team-all',               'export Qiita Team all articles.')                      { |v| @option[:'team-all'] = v }
           opt.on('-i', '--image',                  'export with images.')                                  { |v| @option[:image] = v }
+          opt.on('-c', '--comment',                'export with comments.')                                { |v| @option[:comment] = v }
           opt.on('-h', '--html',                   'export in html format(experimental).')                 { |v| @option[:html] = v }
           opt.on('-o', '--output-dir=dirpath',     'specify the full path of destination directory.')      { |v| @option[:'output-dir'] = v }
           opt.on('-a', '--api-token=token',        'specify API token for Qiita.')                         { |v| @option[:'api-token'] = v }
@@ -109,6 +110,10 @@ module QiitaExport
 
       def image_export?
         @option[:image]
+      end
+
+      def comment_export?
+        @option[:comment]
       end
 
       def team_url?(url)

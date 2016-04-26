@@ -17,6 +17,8 @@ module QiitaExport::Fetcher
       case end_point_sym
       when :item
         ItemEndPoint.new
+      when :comment
+        CommentEndPoint.new
       when :user
         UserEndPoint.new
       when :team
@@ -30,6 +32,12 @@ module QiitaExport::Fetcher
   class ItemEndPoint < ApiEndPoint
     def url(article_url: nil, page: 1)
       "https://#{@config.api_domain(article_url)}/api/v2/items/#{@config.article_key(article_url)}"
+    end
+  end
+
+  class CommentEndPoint < ApiEndPoint
+    def url(article_url: nil, page: 1)
+      "https://#{@config.api_domain(article_url)}/api/v2/items/#{@config.article_key(article_url)}/comments"
     end
   end
 

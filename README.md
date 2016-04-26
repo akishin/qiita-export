@@ -2,6 +2,9 @@
 
 export tool for Qiita(http://qiita.com/).
 
+qiita-export | RubyGems.org  
+https://rubygems.org/gems/qiita-export/
+
 ## Installation
 
 Add this line to your Gemfile:
@@ -33,6 +36,7 @@ Usage: qiita-export [options]
     -t, --team=teamname              export Qiita Team articles only.
     -T, --team-all                   export Qiita Team all articles.
     -i, --image                      export with images.
+    -c, --comment                    export with comments.
     -h, --html                       export in html format(experimental).
     -o, --output-dir=dirpath         specify the full path of destination directory.
     -a, --api-token=token            specify API token for Qiita.

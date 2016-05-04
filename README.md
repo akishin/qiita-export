@@ -41,6 +41,8 @@ Usage: qiita-export [options]
     -o, --output-dir=dirpath         specify the full path of destination directory.
     -a, --api-token=token            specify API token for Qiita.
     -e, --exclude-pattern=regexp     specify the regexp pattern to exclude article title.
+    -g, --original-image-filename    export by original image file name
+        --no-rc                      ignore .qiita-exportrc files.
 ```
 
 ## Contributing

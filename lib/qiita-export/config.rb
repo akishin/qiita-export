@@ -32,13 +32,17 @@ module QiitaExport
           opt.on('-o', '--output-dir=dirpath',     'specify the full path of destination directory.')      { |v| @option[:'output-dir'] = v }
           opt.on('-a', '--api-token=token',        'specify API token for Qiita.')                         { |v| @option[:'api-token'] = v }
           opt.on('-e', '--exclude-pattern=regexp', 'specify the regexp pattern to exclude article title.') { |v| @option[:'exclude-pattern'] = v }
+          opt.on('-g', '--original-image-filename','export by original image file name')                   { |v| @option[:'original-image-filename'] = v }
+          opt.on('--no-rc',                        'ignore .qiita-exportrc files.')                        { |v| @option[:'no-rc'] = v }
         end
 
-        # load home config
-        @parser.load(File.expand_path(HOME_CONFIG_FILE))
+        unless argv.include?("--no-rc")
+          # load home config
+          @parser.load(File.expand_path(HOME_CONFIG_FILE))
 
-        # load local config
-        @parser.load(File.expand_path(LOCAL_CONFIG_FILE))
+          # load local config
+          @parser.load(File.expand_path(LOCAL_CONFIG_FILE))
+        end
 
         # parse argv
         @parser.parse!(argv)
@@ -114,6 +118,10 @@ module QiitaExport
 
       def comment_export?
         @option[:comment]
+      end
+
+      def original_image_filename?
+        @option[:'original-image-filename']
       end
 
       def team_url?(url)

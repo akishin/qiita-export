@@ -5,13 +5,15 @@ require 'qiita-export'
 
 describe QiitaExport::Image do
   let(:valid_key) { '99999999999999999999' }
-  let(:valid_url) { 'http://qiita-image-store.s3.amazonaws.com/example.jpg' }
+  let(:valid_url) { 'http://qiita-image-store.s3.amazonaws.com/2c8ab5c7-8903-b9c6-e08f-82c745a594e5.jpeg' }
+  let(:valid_filename) { '2c8ab5c7-8903-b9c6-e08f-82c745a594e5.jpeg' }
+  let(:valid_org_filename) { 'example.jpg' }
 
   describe ".new" do
 
     context "with arguments" do
       let(:arguments) do
-        [valid_key, valid_url]
+        [valid_key, valid_url, valid_filename, valid_org_filename]
       end
 
       subject do
@@ -41,8 +43,8 @@ describe QiitaExport::Image do
   let(:include_images) {
     <<-"EOS"
 ## Example Markdown
-![foo.png](https://example.com/foo.png "foo.png")
-![bar.png](https://example.com/bar.png)
+![foo.png](https://example.com/foo1234567.png "foo.png")
+![bar.png](https://example.com/bar8901234.png)
     EOS
   }
 
@@ -63,9 +65,13 @@ describe QiitaExport::Image do
       it { expect(subject).not_to be_empty }
       it { expect(subject.length).to eq(2) }
       it { expect(subject.first).to be_an_instance_of(QiitaExport::Image) }
-      it { expect(subject.first.url).to eq('https://example.com/foo.png') }
+      it { expect(subject.first.url).to eq('https://example.com/foo1234567.png') }
+      it { expect(subject.first.filename).to eq('foo1234567.png') }
+      it { expect(subject.first.org_filename).to eq('foo.png') }
       it { expect(subject.last).to be_an_instance_of(QiitaExport::Image) }
-      it { expect(subject.last.url).to eq('https://example.com/bar.png') }
+      it { expect(subject.last.url).to eq('https://example.com/bar8901234.png') }
+      it { expect(subject.last.filename).to eq('bar8901234.png') }
+      it { expect(subject.last.org_filename).to eq('bar.png') }
     end
 
     context "when there is no image urls" do
